@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const searchRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -17,8 +19,29 @@ function SearchBar() {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+        setSearchTerm("");
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <div
+      ref={searchRef}
       className={`flex items-center justify-center w-full transition-all duration-300 ${
         isOpen ? "absolute top-0 left-0 w-full bg-white h-26 z-50" : "w-auto"
       } `}
@@ -46,9 +69,9 @@ function SearchBar() {
           <button
             type="button"
             onClick={handleToggle}
-            className="absolute right-75  transform  bg-blue-500 rounded-full text-white hover:text-gray-300"
+            className="absolute right-75 transform rounded-full text-gray-600 hover:text-gray-500"
           >
-            <IoIosCloseCircleOutline className="w-8 h-8" />
+            <IoMdCloseCircleOutline className="w-8 h-8" />
           </button>
         </form>
       ) : (
