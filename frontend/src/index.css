@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --color-zalando: oklch(45.7% 0.24 277.023);
+}
+
+#root {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
