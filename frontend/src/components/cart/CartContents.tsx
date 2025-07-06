@@ -1,5 +1,5 @@
 import { RiDeleteBin2Line } from "react-icons/ri";
-import type { CartContent } from "../../types/cartContent.types";
+import type { CartContent } from "../../types/cart.types";
 
 function CartContents() {
   const cartProducts: Array<CartContent> = [
