@@ -5,7 +5,7 @@ export interface Order {
   orderItems: [
     {
       name: string;
-      iamge: string;
+      image: string;
     }
   ];
   totalPrice: number;

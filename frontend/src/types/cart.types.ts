@@ -9,3 +9,9 @@ export interface CartContent {
   price: number;
   image: string;
 }
+
+export interface CheckoutCart {
+  products: Array<CartContent>;
+
+  totalPrice: number;
+}
