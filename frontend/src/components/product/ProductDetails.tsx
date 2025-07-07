@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import type { ProductDetails } from "../../types/product.types";
+import type { Product, ProductWithDetails } from "../../types/product.types";
 import { toast } from "sonner";
-import FeaturesSection from "./FeaturesSection";
+import ProductGrid from "./ProductGrid";
 
-const selectedProduct: ProductDetails = {
+const selectedProduct: ProductWithDetails = {
   _id: 23132,
   name: "Lorem, ipsum.",
   price: 75,
@@ -25,6 +25,53 @@ const selectedProduct: ProductDetails = {
     },
   ],
 };
+
+const similarProducts: Array<Product> = [
+  {
+    _id: 1,
+    name: "Product 1",
+    price: 100,
+    images: [
+      {
+        url: "https://picsum.photos/500/500?random=1",
+        altText: "Loream isum",
+      },
+    ],
+  },
+  {
+    _id: 2,
+    name: "Product 2",
+    price: 100,
+    images: [
+      {
+        url: "https://picsum.photos/500/500?random=2",
+        altText: "Loream isum",
+      },
+    ],
+  },
+  {
+    _id: 3,
+    name: "Product 3",
+    price: 100,
+    images: [
+      {
+        url: "https://picsum.photos/500/500?random=3",
+        altText: "Loream isum",
+      },
+    ],
+  },
+  {
+    _id: 4,
+    name: "Product 4",
+    price: 100,
+    images: [
+      {
+        url: "https://picsum.photos/500/500?random=4",
+        altText: "Loream isum",
+      },
+    ],
+  },
+];
 
 function ProductDetails() {
   const [mainImage, setMainImage] = useState<string | null>(null);
@@ -103,20 +150,20 @@ function ProductDetails() {
           </div>
           {/* Right Side */}
           <div className="md:w-1/2 md:ml-10">
-            <h1 className="text-2xl md:text-3xl font-semibold mb-2">
+            <h1 className="text-2xl md:text-3xl font-semibold mb-1">
               {selectedProduct.name}
             </h1>
             <p className="text-lg text-gray-600 mb-1 line-through">
               {"€"}
               {selectedProduct.originalPrice && selectedProduct.originalPrice}
             </p>
-            <p className="text-lg text-gray-600 mb-2">
+            <p className="text-lg text-gray-600 mb-1">
               {"€"}
               {selectedProduct.price}
             </p>
             <p className=" text-gray-600 mb-4">{selectedProduct.description}</p>
 
-            <div className="mb-4">
+            <div className="mb-2">
               <p className="text-gray-700">Color:</p>
               <div className="flex gap-2 mt-2">
                 {selectedProduct.colors.map((color) => (
@@ -137,7 +184,7 @@ function ProductDetails() {
               </div>
             </div>
 
-            <div className="mb-4">
+            <div className="mb-2">
               <p className="text-gray-700 ">Size:</p>
               <div className="flex gap-2 mt-2 ">
                 {selectedProduct.sizes.map((size) => (
@@ -153,7 +200,7 @@ function ProductDetails() {
                 ))}
               </div>
             </div>
-            <div className="mb-6">
+            <div className="mb-2">
               <p className="text-gray-700">Quantity:</p>
               <div className="flex items-center space-x-4 mt-2">
                 <button
@@ -200,8 +247,12 @@ function ProductDetails() {
             </div> */}
           </div>
         </div>
-        <div className="mt-8 ">
-          <FeaturesSection />
+
+        <div className="mt-20 ">
+          <h2 className="text-2xl text-center font-medium mb-4">
+            Similar Items
+          </h2>
+          <ProductGrid products={similarProducts} />
         </div>
       </div>
     </div>

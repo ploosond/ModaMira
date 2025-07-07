@@ -10,7 +10,7 @@ export interface Product {
   }>;
 }
 
-export interface ProductDetails extends Product {
+export interface ProductWithDetails extends Product {
   originalPrice: number;
   description: string;
   brand: string;
